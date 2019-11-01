@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 
-class TraitMakeCommand extends Command
+class TraitMakeCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.

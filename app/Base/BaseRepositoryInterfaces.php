@@ -4,7 +4,7 @@ namespace App\Base;
 
 interface BaseRepositoryInterface
 {
-    public function all();
+    public function all($filters);
 
     public function create(array $data);
 

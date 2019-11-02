@@ -4,7 +4,7 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements BaseRepositoryInterface
+abstract class BaseRepository implements BaseRepositoryInterface
 {
     // model property on class instances
     protected $model;
@@ -16,9 +16,9 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     // Get all instances of model
-    public function all()
+    public function all($filters)
     {
-        return $this->model->all();
+        return $this->model->filter($filters)->all();
     }
 
     // create a new record in the database
@@ -43,7 +43,7 @@ class BaseRepository implements BaseRepositoryInterface
     // show the record with the given id
     public function show($id)
     {
-        return $this->model - findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     // Get the associated model

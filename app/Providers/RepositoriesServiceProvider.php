@@ -9,28 +9,26 @@ use App\Repositories\Region\RegionRepositoryInterface;
 use App\Repositories\Region\RegionRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Province\ProvinceRepository;
+use App\Repositories\Province\ProvinceRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register()
     {
-        //
     }
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot()
     {
         $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(RegionRepositoryInterface::class, RegionRepository::class);
+        $this->app->bind(ProvinceRepositoryInterface::class, ProvinceRepository::class);
     }
 }

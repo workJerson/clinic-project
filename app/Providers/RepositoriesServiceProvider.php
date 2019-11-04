@@ -11,6 +11,8 @@ use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Province\ProvinceRepository;
 use App\Repositories\Province\ProvinceRepositoryInterface;
+use App\Repositories\City\CityRepository;
+use App\Repositories\City\CityRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(RegionRepositoryInterface::class, RegionRepository::class);
         $this->app->bind(ProvinceRepositoryInterface::class, ProvinceRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
     }
 }

@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
+Route::resource('province', 'ProvinceController', ['only' => ['index', 'show']]);
 Route::resource('files', 'FileController', ['only' => ['store', 'destroy']]);

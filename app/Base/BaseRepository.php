@@ -16,9 +16,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     // Get all instances of model
-    public function all($filters)
+    public function all()
     {
-        return $this->model->filter($filters)->all();
+        return $this->model->all();
     }
 
     // create a new record in the database
@@ -31,6 +31,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function update(array $data, $id)
     {
         $record = $this->find($id);
+
         return $record->update($data);
     }
 
@@ -56,6 +57,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function setModel($model)
     {
         $this->model = $model;
+
         return $this;
     }
 

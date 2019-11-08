@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('master');
 });
 
 Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);

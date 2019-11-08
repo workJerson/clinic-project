@@ -9,6 +9,15 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "dependencies": {
+        "bootstrap": "^4.1.0",
+        "chartist": "^0.11.0",
+        "es6-promise": "^4.2.4",
+        "vue": "^2.6.10",
+        "vue-clickaway": "^2.1.0",
+        "vue-notifyjs": "^0.3.0",
+        "vue-router": "^3.0.1"
+    },
     "devDependencies": {
         "axios": "^0.19",
         "bootstrap": "^4.1.0",

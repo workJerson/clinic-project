@@ -15,8 +15,9 @@ class User extends Authenticatable
     /**
      * User Account Types
      * 1 = Super Admin
-     * 2 = CMS User
-     * 3 = Patient
+     * 2 = Manager
+     * 3 = PT
+     * 4 = Patient
      */
 
     /**

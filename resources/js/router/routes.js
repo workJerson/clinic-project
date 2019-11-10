@@ -1,4 +1,6 @@
 import DashboardLayout from "../layout/dashboard/DashboardLayout.vue";
+import Auth from "../layout/auth/Auth.vue";
+import Login from "../pages/Auth/Login.vue";
 // GeneralViews
 import NotFound from "../pages/NotFoundPage.vue";
 
@@ -12,6 +14,13 @@ import Typography from "../pages/Typography.vue";
 import TableList from "../pages/TableList.vue";
 
 const routes = [
+    {
+        path: '/auth',
+        component: Auth,
+        children: [
+            { path: '', name: 'userLogin', component: Login },
+        ]
+    },
     {
         path: "/",
         component: DashboardLayout,

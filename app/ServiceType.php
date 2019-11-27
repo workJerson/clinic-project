@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Filterable;
 
-class Service extends Model
+class ServiceType extends Model
 {
     use Filterable;
 
     protected $fillable = [];
 
-    public function serviceType()
+    public function services()
     {
-        return $this->belongsTo(ServiceType::class);
+        return $this->hasMany(Service::class);
     }
 }

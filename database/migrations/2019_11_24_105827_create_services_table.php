@@ -8,21 +8,22 @@ class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->boolean('status')->default(1);
+            $table->unsignedBigInteger('service_type_id')->nullable();
             $table->timestamps();
+            $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade');
+            $table->index('service_type_id');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

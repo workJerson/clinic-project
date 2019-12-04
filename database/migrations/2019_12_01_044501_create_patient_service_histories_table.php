@@ -8,21 +8,18 @@ class CreatePatientServiceHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('patient_service_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('patient_id');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         //Transactional
         $this->call(ServiceTypeSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(HMOSeeder::class);
     }
 }

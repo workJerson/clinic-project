@@ -4,7 +4,6 @@ namespace App;
 
 use App\Traits\Filterable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
@@ -17,7 +16,7 @@ class User extends Authenticatable
      * 1 = Super Admin
      * 2 = Manager
      * 3 = PT
-     * 4 = Patient
+     * 4 = Patient.
      */
 
     /**
@@ -26,7 +25,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+         'email',
+         'password',
+         'email_verified_at',
+         'is_web',
+         'is_cms',
+         'status',
+         'login_attempts',
+         'account_type',
     ];
 
     /**
@@ -91,5 +97,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function details()
+    {
+        return $this->hasOne(UserDetails::class);
     }
 }

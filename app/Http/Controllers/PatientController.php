@@ -56,6 +56,10 @@ class PatientController extends Controller
      */
     public function show($id)
     {
+        $data = $this->model->show($id)->load([
+        ]);
+
+        return response($data);
     }
 
     /**

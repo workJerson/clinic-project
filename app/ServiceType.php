@@ -9,7 +9,10 @@ class ServiceType extends Model
 {
     use Filterable;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'status',
+    ];
 
     public function services()
     {

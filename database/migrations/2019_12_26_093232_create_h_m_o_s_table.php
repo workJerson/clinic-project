@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatientServiceHistoriesTable extends Migration
+class CreateHMOSTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('patient_service_histories', function (Blueprint $table) {
+        Schema::create('h_m_o_s', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('patient_id');
+            $table->text('name');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ class CreatePatientServiceHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_service_histories');
+        Schema::dropIfExists('h_m_o_s');
     }
 }

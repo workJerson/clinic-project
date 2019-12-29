@@ -23,6 +23,8 @@ use App\Repositories\PatientServiceHistory\PatientServiceHistoryRepository;
 use App\Repositories\PatientServiceHistory\PatientServiceHistoryRepositoryInterface;
 use App\Repositories\PatientTransaction\PatientTransactionRepository;
 use App\Repositories\PatientTransaction\PatientTransactionRepositoryInterface;
+use App\Repositories\Personnel\PersonnelRepository;
+use App\Repositories\Personnel\PersonnelRepositoryInterface;
 use App\Repositories\Service\ServiceRepository;
 use App\Repositories\Service\ServiceRepositoryInterface;
 use App\Repositories\Service\ServiceTypeRepository;
@@ -61,5 +63,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(ServiceRateRepositoryInterface::class, ServiceRateRepository::class);
         $this->app->bind(ServiceTypeRepositoryInterface::class, ServiceTypeRepository::class);
         $this->app->bind(UserDetailsRepositoryInterface::class, UserDetailsRepository::class);
+        $this->app->bind(PersonnelRepositoryInterface::class, PersonnelRepository::class);
     }
 }

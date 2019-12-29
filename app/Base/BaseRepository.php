@@ -2,9 +2,11 @@
 
 namespace App\Base;
 
+use App\Http\Controllers\Controller;
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseRepository implements BaseRepositoryInterface
+abstract class BaseRepository extends Controller implements BaseRepositoryInterface
 {
     // model property on class instances
     protected $model;
@@ -65,5 +67,15 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function with($relations)
     {
         return $this->model->with($relations);
+    }
+
+    public function filter($filters)
+    {
+        return $this->model->filter($filters);
+    }
+
+    public function load($relations)
+    {
+        return $this->model->load($relations);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Http\Filters\QueryFilters;
+
 trait Filterable
 {
     /**

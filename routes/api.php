@@ -31,7 +31,8 @@ Route::group(
                 Route::resource('files', 'FileController', ['only' => ['store', 'destroy']]);
 
                 // Users
-                Route::resource('service', 'UserController', ['except' => ['edit', 'destroy']]);
+                Route::resource('users', 'UserController', ['except' => ['create', 'edit', 'destroy']]);
+                Route::resource('user-details', 'UserDetailController', ['except' => ['create', 'edit', 'destroy']]);
 
                 // Patient
                 Route::resource('patient', 'PatientController', ['except' => ['edit', 'destroy']]);

@@ -13,19 +13,19 @@ class HMOSeeder extends Seeder
         $hmo = [
             [
                 'id' => 1,
-                'name' => 'Asianlife',
+                'name' => 'COCOLIFE',
             ],
             [
                 'id' => 2,
-                'name' => 'AVEGA',
+                'name' => 'ETIQA',
             ],
             [
                 'id' => 3,
-                'name' => 'Cocolife',
+                'name' => 'INTELLICARE',
             ],
             [
                 'id' => 4,
-                'name' => 'Generali',
+                'name' => 'VALUCARE',
             ],
             [
                 'id' => 5,
@@ -33,47 +33,27 @@ class HMOSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'name' => 'Insular Healthcare',
+                'name' => 'AVEGA',
             ],
             [
                 'id' => 7,
-                'name' => 'Intellicare',
+                'name' => 'INLIFE',
             ],
             [
                 'id' => 8,
-                'name' => 'Medicard',
-            ],
-            [
-                'id' => 9,
-                'name' => 'Voyager',
-            ],
-            [
-                'id' => 10,
                 'name' => 'PLDT',
             ],
             [
-                'id' => 12,
-                'name' => 'Mediaque',
+                'id' => 9,
+                'name' => 'MEDICARD',
             ],
             [
-                'id' => 13,
-                'name' => 'Smart',
+                'id' => 10,
+                'name' => 'GENERAL',
             ],
             [
-                'id' => 14,
-                'name' => 'Paymaya',
-            ],
-            [
-                'id' => 15,
-                'name' => 'PGN',
-            ],
-            [
-                'id' => 16,
-                'name' => 'Valucare',
-            ],
-            [
-                'id' => 17,
-                'name' => 'Cash',
+                'id' => 11,
+                'name' => 'CASH',
             ],
         ];
 

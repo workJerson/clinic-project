@@ -29,6 +29,15 @@ Route::group(
                 Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
                 Route::resource('province', 'ProvinceController', ['only' => ['index', 'show']]);
                 Route::resource('files', 'FileController', ['only' => ['store', 'destroy']]);
+
+                // Users
+                Route::resource('service', 'UserController', ['except' => ['edit', 'destroy']]);
+
+                // Patient
+                Route::resource('patient', 'PatientController', ['except' => ['edit', 'destroy']]);
+
+                // Service
+                Route::resource('service', 'ServiceController', ['except' => ['edit', 'destroy']]);
             }
         );
     }

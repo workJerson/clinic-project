@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\RegisterUserRequest as AuthRegisterUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -9,7 +10,6 @@ use App\User;
 use App\UserDetails;
 use Exception;
 use DB;
-use App\Http\Requests\User\RegisterUserRequest;
 
 class AuthController extends Controller
 {
@@ -23,15 +23,15 @@ class AuthController extends Controller
      *
      * @return [string] message
      */
-    public function signup(RegisterUserRequest $request)
+    public function signup(AuthRegisterUserRequest $request)
     {
         $request->validated();
 
         $user = new User([
             'email' => $request->email,
-            'is_web' => true,
+            'is_cms' => true,
             'status' => 1, // Active
-            'account_type' => 0, // Customer
+            'account_type' => 1, // Customer
         ]);
         $user->password = $request->password;
         $user->save();
@@ -39,6 +39,7 @@ class AuthController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'user_id' => $user->id,
+            'title' => 'ADMIN',
         ]);
 
         try {
@@ -140,5 +141,6 @@ class AuthController extends Controller
     }
 
     public function checkUserIfDeactivated($user)
-    { }
+    {
+    }
 }

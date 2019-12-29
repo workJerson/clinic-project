@@ -19,11 +19,11 @@ class CreateUserDetailsTable extends Migration
             $table->string('middle_name', 100)->nullable();
             $table->string('last_name', 100);
             $table->string('title', 10);
-            $table->string('phone_number', 20);
+            $table->string('phone_number', 20)->nullable();
             $table->string('mobile_number', 20)->nullable();
-            $table->string('city');
-            $table->string('address');
-            $table->string('zip_code', 50);
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->string('zip_code', 50)->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

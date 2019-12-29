@@ -25,14 +25,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'email',
-         'password',
-         'email_verified_at',
-         'is_web',
-         'is_cms',
-         'status',
-         'login_attempts',
-         'account_type',
+        'email',
+        'password',
+        'email_verified_at',
+        'is_web',
+        'is_cms',
+        'status',
+        'login_attempts',
+        'account_type',
+        'password_confirmation',
     ];
 
     /**
@@ -99,7 +100,7 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function details()
+    public function userDetails()
     {
         return $this->hasOne(UserDetails::class);
     }

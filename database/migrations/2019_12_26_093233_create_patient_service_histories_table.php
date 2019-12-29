@@ -17,7 +17,11 @@ class CreatePatientServiceHistoriesTable extends Migration
             $table->unsignedBigInteger('patient_hmo_id')->nullable();
             $table->string('approval_code')->nullable();
             $table->decimal('total_charges', 18, 6)->nullable();
+            $table->decimal('discounted_charges', 18, 6)->nullable();
+            $table->decimal('discount_rate')->nullable();
+            $table->string('payment_type')->nullable();
             $table->integer('transaction_status');
+            $table->integer('status')->default(1);
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients');

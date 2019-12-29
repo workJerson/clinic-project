@@ -14,6 +14,10 @@ class PatientServiceHistory extends Model
         'approval_code',
         'total_charges',
         'transaction_status',
+        'discounted_charges',
+        'discount_rate',
+        'payment_type',
+        'status',
     ];
 
     public function patient()

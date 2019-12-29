@@ -71,6 +71,10 @@ class HMOSeeder extends Seeder
                 'id' => 16,
                 'name' => 'Valucare',
             ],
+            [
+                'id' => 17,
+                'name' => 'Cash',
+            ],
         ];
 
         foreach ($hmo as $key => $value) {

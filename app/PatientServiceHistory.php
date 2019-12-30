@@ -11,6 +11,7 @@ class PatientServiceHistory extends Model
     protected $fillable = [
         'patient_id',
         'patient_hmo_id',
+        'personnel_id',
         'approval_code',
         'total_charges',
         'transaction_status',
@@ -32,5 +33,9 @@ class PatientServiceHistory extends Model
     public function transactions()
     {
         return $this->hasMany(PatientTransaction::class);
+    }
+    public function personnel()
+    {
+        return $this->belongsTo(Personnel::class, 'personnel_id');
     }
 }

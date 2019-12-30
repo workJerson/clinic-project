@@ -36,6 +36,7 @@ Route::group(
 
                 // Patient
                 Route::resource('patients', 'PatientController', ['except' => ['edit', 'destroy']]);
+                Route::resource('patient-hmos', 'PatientHmoController', ['except' => ['edit', 'destroy']]);
 
                 // Service
                 Route::resource('services', 'ServiceController', ['except' => ['edit', 'destroy']]);

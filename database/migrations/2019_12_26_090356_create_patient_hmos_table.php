@@ -15,7 +15,7 @@ class CreatePatientHmosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('hmo_id');
-            $table->string('account_number');
+            $table->string('account_number')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

@@ -35,10 +35,10 @@ Route::group(
                 Route::resource('user-details', 'UserDetailController', ['except' => ['create', 'edit', 'destroy']]);
 
                 // Patient
-                Route::resource('patient', 'PatientController', ['except' => ['edit', 'destroy']]);
+                Route::resource('patients', 'PatientController', ['except' => ['edit', 'destroy']]);
 
                 // Service
-                Route::resource('service', 'ServiceController', ['except' => ['edit', 'destroy']]);
+                Route::resource('services', 'ServiceController', ['except' => ['edit', 'destroy']]);
             }
         );
     }

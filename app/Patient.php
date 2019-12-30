@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Filterable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
@@ -35,6 +36,12 @@ class Patient extends Model
 
     public function hmos()
     {
-        return $this->hasMany(HMO::class);
+        return $this->hasMany(PatientHmo::class);
+    }
+
+    public function setBirthDateAttribute($value)
+    {
+
+        $this->attributes['birth_date'] = Carbon::parse($value);
     }
 }

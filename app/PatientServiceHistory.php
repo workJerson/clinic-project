@@ -29,4 +29,8 @@ class PatientServiceHistory extends Model
     {
         return $this->belongsTo(PatientHmo::class, 'patient_hmo_id');
     }
+    public function transactions()
+    {
+        return $this->hasMany(PatientTransaction::class);
+    }
 }

@@ -32,9 +32,9 @@ abstract class BaseRepository extends Controller implements BaseRepositoryInterf
     // update record in the database
     public function update(array $data, $id)
     {
-        $record = $this->find($id);
-
-        return $record->update($data);
+        $record = $this->model->find($id);
+        $record->update($data);
+        return $record;
     }
 
     // remove record from the database
@@ -42,7 +42,6 @@ abstract class BaseRepository extends Controller implements BaseRepositoryInterf
     {
         return $this->model->destroy($id);
     }
-
     // show the record with the given id
     public function show($id)
     {

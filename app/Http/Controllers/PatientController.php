@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Patient\PatientRepositoryInterface;
 use App\Http\Filters\ResourceFilters;
+use App\Http\Requests\Patient\CreatePatientRequest;
 
 class PatientController extends Controller
 {
@@ -22,9 +23,16 @@ class PatientController extends Controller
      */
     public function index(ResourceFilters $filters)
     {
-        $data = $this->model->all();
+        return $this->generateCachedResponse(function () use ($filters) {
+            $patients = $this->model->filter($filters)
+                ->with([
+                    'serviceHistories',
+                    'serviceHistories.patientHmo',
+                    'hmos',
+                ]);
 
-        return response($data);
+            return $this->paginateOrGet($patients);
+        });
     }
 
     /**
@@ -43,8 +51,11 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePatientRequest $request)
     {
+        $patient = $this->model->create($request->validated());
+
+        return response($patient, 201);
     }
 
     /**
@@ -57,10 +68,14 @@ class PatientController extends Controller
     public function show($id)
     {
         $data = $this->model->show($id)->load([
+            'serviceHistories',
+            'serviceHistories.patientHmo',
+            'hmos',
         ]);
 
         return response($data);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -81,8 +96,10 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreatePatientRequest $request, $id)
     {
+        $patient = $this->model->update($request->validated(), $id);
+        return response($patient->load(['serviceHistories', 'serviceHistories.transactions', 'hmos']));
     }
 
     /**

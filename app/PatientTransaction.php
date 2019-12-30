@@ -9,7 +9,11 @@ class PatientTransaction extends Model
 {
     use Filterable;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'patient_service_history_id',
+        'service_id',
+        'service_rate_id',
+    ];
 
     public function serviceHistory()
     {

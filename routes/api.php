@@ -43,6 +43,9 @@ Route::group(
 
                 // Personnel
                 Route::resource('personnels', 'PersonnelController', ['except' => ['edit', 'destroy']]);
+
+                // HMO
+                Route::resource('hmos', 'HMOController', ['except' => ['edit', 'destroy']]);
             }
         );
     }

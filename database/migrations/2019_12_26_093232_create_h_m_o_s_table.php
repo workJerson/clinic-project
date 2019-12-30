@@ -15,6 +15,7 @@ class CreateHMOSTable extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->boolean('status')->default(1);
+            $table->decimal('discount')->nullable();
             $table->timestamps();
         });
     }

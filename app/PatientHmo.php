@@ -23,6 +23,6 @@ class PatientHmo extends Model
 
     public function hmo()
     {
-        return $this->belongsTo(HMO::class, 'hmo_id');
+        return $this->belongsTo(HMO::class, 'hmo_id', 'id');
     }
 }

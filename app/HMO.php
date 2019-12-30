@@ -9,12 +9,13 @@ class HMO extends Model
 {
     use Filterable;
     protected $fillable = [
-       'name',
-       'status',
-   ];
+        'name',
+        'discount',
+        'status',
+    ];
 
     public function patientHmo()
     {
-        return $this->hasMany(PatientHmo::class);
+        return $this->hasMany(PatientHmo::class, 'hmo_id');
     }
 }

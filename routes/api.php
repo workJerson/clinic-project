@@ -41,6 +41,7 @@ Route::group(
                 // Service
                 Route::resource('services', 'ServiceController', ['except' => ['edit', 'destroy']]);
                 Route::resource('service-types', 'ServiceTypeController', ['except' => ['edit', 'destroy']]);
+                Route::resource('service-rates', 'ServiceRateController', ['except' => ['edit', 'destroy']]);
 
                 // Personnel
                 Route::resource('personnels', 'PersonnelController', ['except' => ['edit', 'destroy']]);

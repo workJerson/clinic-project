@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\ResourceFilters;
+use App\Http\Requests\Service\CreateServiceRequest;
 use Illuminate\Http\Request;
 use App\Repositories\Service\ServiceRepositoryInterface;
 
@@ -19,8 +21,16 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ResourceFilters $filters)
     {
+        return $this->generateCachedResponse(function () use ($filters) {
+            $service = $this->model->filter($filters)
+                ->with([
+                    'serviceType',
+                ]);
+
+            return $this->paginateOrGet($service);
+        });
     }
 
     /**
@@ -39,8 +49,10 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateServiceRequest $request)
     {
+        $service = $this->model->create($request->validated());
+        return response($service, 201);
     }
 
     /**
@@ -52,6 +64,8 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
+        $service = $this->model->show($id);
+        return response($service);
     }
 
     /**
@@ -73,8 +87,11 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateServiceRequest $request, $id)
     {
+        $service = $this->model->update($request->validated(), $id);
+
+        return response($service);
     }
 
     /**

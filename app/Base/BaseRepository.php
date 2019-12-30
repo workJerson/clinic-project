@@ -77,4 +77,9 @@ abstract class BaseRepository extends Controller implements BaseRepositoryInterf
     {
         return $this->model->load($relations);
     }
+
+    public function isActive()
+    {
+        return $this->model->where('status', 1);
+    }
 }

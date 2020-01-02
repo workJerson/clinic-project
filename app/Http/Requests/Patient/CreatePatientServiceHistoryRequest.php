@@ -13,7 +13,7 @@ class CreatePatientServiceHistoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +24,26 @@ class CreatePatientServiceHistoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'patient_id' => [
+            ],
+            'patient_hmo_id' => [
+            ],
+            'personnel_id' => [
+            ],
+            'approval_code' => [
+            ],
+            'total_charges' => [
+            ],
+            'transaction_status' => [
+            ],
+            'discounted_charges' => [
+            ],
+            'discount_rate' => [
+            ],
+            'payment_type' => [
+            ],
+            'status' => [
+            ],
         ];
     }
 }

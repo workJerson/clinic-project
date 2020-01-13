@@ -19,4 +19,12 @@ class PatientTransaction extends Model
     {
         return $this->belongsTo(PatientServiceHistory::class, 'patient_service_history_id');
     }
+    public function rate()
+    {
+        return $this->belongsTo(ServiceRate::class, 'service_rate_id');
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 }

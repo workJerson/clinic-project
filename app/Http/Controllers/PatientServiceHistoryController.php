@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\ResourceFilters;
 use App\Http\Requests\Patient\CreatePatientServiceHistoryRequest;
+use App\Repositories\PatientServiceHistory\PatientServiceHistoryRepositoryInterface;
+use Exception;
 use Illuminate\Http\Request;
+use DB;
 
 class PatientServiceHistoryController extends Controller
 {
-    private $model;
+    protected $model;
 
-    public function __construct(PatientServiceHistoryController $patientServiceHistoryController)
+    public function __construct(PatientServiceHistoryRepositoryInterface $patientServiceHistoryController)
     {
         $this->model = $patientServiceHistoryController;
     }
@@ -18,9 +22,19 @@ class PatientServiceHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ResourceFilters $filters)
     {
-        //
+        return $this->generateCachedResponse(function () use ($filters) {
+            $serviceHistories = $this->model->filter($filters)
+                ->with([
+                    'patient',
+                    'patientHmo',
+                    'transactions',
+                    'personnel',
+                ]);
+
+            return $this->paginateOrGet($serviceHistories);
+        });
     }
 
     /**
@@ -41,7 +55,28 @@ class PatientServiceHistoryController extends Controller
      */
     public function store(CreatePatientServiceHistoryRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $payload = $request->validated();
+            $serviceHistory = $this->model->store($payload);
+
+            if (isset($serviceHistory['error'])) {
+                return response($serviceHistory, 400);
+            }
+
+            if ($payload['patient_transactions']) {
+                foreach ($payload['patient_transactions'] as $key => $value) {
+                    $serviceHistory->transactions()->create($value);
+                }
+            }
+
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollback();
+            dd($ex);
+        }
+
+        return response($serviceHistory, 201);
     }
 
     /**
@@ -52,7 +87,14 @@ class PatientServiceHistoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->model->show($id)->load([
+            'patient',
+            'patientHmo',
+            'transactions',
+            'personnel',
+        ]);
+
+        return response($data);
     }
 
     /**
@@ -75,7 +117,34 @@ class PatientServiceHistoryController extends Controller
      */
     public function update(CreatePatientServiceHistoryRequest $request, $id)
     {
-        //
+        $payload = $request->validated();
+        try {
+            DB::beginTransaction();
+            $object = $this->model->update($payload, $id);
+            switch ($payload['transaction_status']) {
+                case 2:
+                    $totalAmount = 0;
+                    foreach ($object->transactions as $value) {
+                        $totalAmount += $value->rate->total_rate;
+                    }
+                    $object->total_charges = $totalAmount;
+                    if (isset($object->patientHmo->hmo->discount)) {
+                        $discount = $object->patientHmo->hmo->discount;
+                        $object->discount_rate = $discount;
+                        $object->discounted_charges = $totalAmount - ($totalAmount * ($discount / 100));
+                    }
+                    $object->save();
+                    break;
+
+                default:
+                    break;
+            }
+            DB::commit();
+        } catch (Exception $ex) {
+            DB::rollback();
+            dd($ex);
+        }
+        return response($object);
     }
 
     /**

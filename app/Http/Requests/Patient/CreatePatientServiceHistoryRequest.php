@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreatePatientServiceHistoryRequest extends FormRequest
 {
@@ -23,26 +24,54 @@ class CreatePatientServiceHistoryRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'patient_id' => [
+                'required',
+                'numeric',
+                'exists:patients,id',
             ],
             'patient_hmo_id' => [
+                'required',
+                'numeric',
+                'exists:patient_hmos,id',
             ],
             'personnel_id' => [
+                'required',
+                'numeric',
+                'exists:personnels,id',
             ],
             'approval_code' => [
-            ],
-            'total_charges' => [
+                'sometimes',
+                'string',
             ],
             'transaction_status' => [
-            ],
-            'discounted_charges' => [
-            ],
-            'discount_rate' => [
+                'sometimes',
+                'required',
+                'numeric',
             ],
             'payment_type' => [
+                'sometimes',
+                'nullable',
+                'string'
             ],
             'status' => [
+                'sometimes',
+                'numeric',
+            ],
+            'patient_transactions' => [
+                'sometimes',
+                'array',
+            ],
+            'patient_transactions.service_id' => [
+                'sometimes',
+                'numeric',
+                'exists:services,id'
+            ],
+            'patient_transactions.service_rate_id' => [
+                'sometimes',
+                'numeric',
+                'exists:service_rates,id'
             ],
         ];
     }

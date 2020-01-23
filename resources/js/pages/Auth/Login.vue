@@ -7,18 +7,15 @@
       </div>
       <h4 class="modal-title">Login to Your Account</h4>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username" required="required" />
+        <input v-model="username" type="text" class="form-control" placeholder="Username" />
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" required="required" />
+        <input v-model="password" type="password" class="form-control" placeholder="Password" />
       </div>
       <div class="form-group small clearfix">
-        <label class="checkbox-inline">
-          <input type="checkbox" /> Remember me
-        </label>
         <a href="#" class="forgot-link">Forgot Password?</a>
       </div>
-      <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login" />
+      <input @click="login" type="submit" class="btn btn-primary btn-block btn-lg" value="Login" />
     </form>
     <!-- <div class="text-center small">
       Don't have an account?
@@ -27,7 +24,42 @@
   </div>
 </template>
 <script>
-export default {};
+import NotificationTemplate from '../Notifications/NotificationTemplate';
+
+export default {
+  data() {
+    return {
+      username: null,
+      password: null,
+    };
+  },
+  components: {
+    NotificationTemplate,
+  },
+  methods: {
+    async login() {
+      this.$axios.post('api/auth/login', {
+        username: this.username,
+        password: this.password,
+      }).then((response) => {
+        console.log('here');
+      }).catch((error) => {
+        let message =
+          error.response.data.errors;
+          for (let [key, value] of Object.entries(message)) {
+            this.$notify({
+              message: value[0],
+              component: NotificationTemplate,
+              icon: "ti-close",
+              horizontalAlign: 'right',
+              verticalAlign: 'top',
+              type: 'danger'
+            });
+          }        
+      })
+    },
+  }
+};
 </script>
 <style type="text/css">
 body {

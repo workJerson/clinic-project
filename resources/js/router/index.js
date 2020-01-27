@@ -9,4 +9,19 @@ const router = new VueRouter({
     linkActiveClass: "active"
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        const user = localStorage.getItem('loginInfo');
+        if (user === null) {
+            next({
+                path: '/auth',
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+})
+
 export default router;

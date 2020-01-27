@@ -7,7 +7,7 @@
       </div>
       <h4 class="modal-title">Login to Your Account</h4>
       <div class="form-group">
-        <input v-model="username" type="text" class="form-control" placeholder="Username" />
+        <input v-model="email" type="text" class="form-control" placeholder="Username" />
       </div>
       <div class="form-group">
         <input v-model="password" type="password" class="form-control" placeholder="Password" />
@@ -15,7 +15,7 @@
       <div class="form-group small clearfix">
         <a href="#" class="forgot-link">Forgot Password?</a>
       </div>
-      <input @click="login" type="submit" class="btn btn-primary btn-block btn-lg" value="Login" />
+      <input @click="login" type="button" class="btn btn-primary btn-block btn-lg" value="Login" />
     </form>
     <!-- <div class="text-center small">
       Don't have an account?
@@ -29,7 +29,7 @@ import NotificationTemplate from '../Notifications/NotificationTemplate';
 export default {
   data() {
     return {
-      username: null,
+      email: null,
       password: null,
     };
   },
@@ -39,10 +39,13 @@ export default {
   methods: {
     async login() {
       this.$axios.post('api/auth/login', {
-        username: this.username,
+        email: this.email,
         password: this.password,
       }).then((response) => {
-        console.log('here');
+        localStorage.setItem('loginInfo', JSON.stringify(response.data));
+        this.$router.push({
+          name: 'dashboard'
+        });
       }).catch((error) => {
         let message =
           error.response.data.errors;

@@ -24,8 +24,7 @@
               <template v-show="is_loading === false">
                 <tr v-for="(item, index) in tableData" :key="item.id + '' + index">
                   <td v-text="item.name"></td>
-                  <td v-text="item.email"></td>
-                  <td v-text="item.title"></td>
+                  <td v-text="item.discount"></td>
                   <td :class="(item.status === 'Active') ? 'text-success' : 'text-danger'" v-text="item.status"></td>
                   <td>View</td>
                 </tr>
@@ -78,23 +77,24 @@
   export default {
     data() {
       return {
-        tableColumns: ["Name", "Email", "Title", "Status", "Action"],
-        title: "User Master List",
+        tableColumns: ["Name", "Discount", "Status", "Action"],
+        title: "HMO Master List",
         tableData: [],
         current_page: 1,
         total: 0,
         last_page: 1,
         per_page: 15,
+        is_loading: true,
       };
     },
     mounted() {
-      this.fetchUsers(1, '', '', 1);
+      this.fetchHMO(1, '', '', 1);
     },
     methods: {
-      fetchUsers(page, dateFrom, dateTo, status) {
+      fetchHMO(page, dateFrom, dateTo, status) {
         this.tableData = [];
         this.is_loading = true;
-        this.$axios.get('api/users', {
+        this.$axios.get('api/hmos', {
           params: {
             page: page,
             dateFrom: dateFrom,
@@ -106,9 +106,8 @@
           this.tableData = response.data.data.map((item) => {
             return {
               id: item.id,
-              name: this.getInformation(item.user_details, 'name'),
-              email: item.email,
-              title: this.getInformation(item.user_details, 'title'),
+              name: item.name,
+              discount: (item.discount) ? item.discount : 'Not Available',
               status: (item.status === 1) ? 'Active' : 'Inactive',
             };
           });
@@ -119,21 +118,8 @@
           console.warn(error);
         })
       },
-      getInformation(data, field) {
-        if (data) {
-          if (field === 'name') {
-            let fname = data && data.first_name || '';
-            let mname = data && data.middle_name || '';
-            let lname = data && data.last_name || '';
-
-            return `${fname || ''} ${mname || ''} ${lname || ''}`;
-          }
-          return (data[field] !== null) ? data[field] : '--';
-        }
-        return '--';
-      },
       movePage(page) {
-        this.fetchUsers(page, '', '', 1);
+        this.fetchHMO(page, '', '', 1);
       },
     },
   };

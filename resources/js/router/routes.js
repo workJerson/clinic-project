@@ -16,6 +16,12 @@ import TableList from "../pages/TableList.vue";
 // user module
 import UserTableList from "../pages/UserTableList.vue";
 
+// hmo module
+import HMOTableList from "../pages/HMOTableList.vue";
+
+//services module
+import ServiceTableList from "../pages/ServiceTableList.vue";
+
 const routes = [
     {
         path: '/auth',
@@ -69,8 +75,18 @@ const routes = [
             },
             {
                 path: "user-table-list",
-                name: "user-table-list",
+                name: "User Master List",
                 component: UserTableList
+            },
+            {
+                path: "hmo-table-list",
+                name: "HMO Master List",
+                component: HMOTableList
+            },
+            {
+                path: "service-table-list",
+                name: "Services Master List",
+                component: ServiceTableList
             },
         ]
     },

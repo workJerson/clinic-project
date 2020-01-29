@@ -13,6 +13,9 @@ import Maps from "../pages/Maps.vue";
 import Typography from "../pages/Typography.vue";
 import TableList from "../pages/TableList.vue";
 
+// user module
+import UserTableList from "../pages/UserTableList.vue";
+
 const routes = [
     {
         path: '/auth',
@@ -63,7 +66,12 @@ const routes = [
                 path: "table-list",
                 name: "table-list",
                 component: TableList
-            }
+            },
+            {
+                path: "user-table-list",
+                name: "user-table-list",
+                component: UserTableList
+            },
         ]
     },
     { path: "*", component: NotFound }

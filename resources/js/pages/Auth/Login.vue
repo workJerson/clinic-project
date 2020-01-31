@@ -58,7 +58,7 @@ export default {
               verticalAlign: 'top',
               type: 'danger'
             });
-          }        
+          }
       })
     },
   }

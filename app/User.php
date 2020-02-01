@@ -54,6 +54,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function searchable()
+    {
+        return [
+            'email',
+            'status',
+            'userDetails_',
+            'userDetails_first_name',
+            'userDetails_middle_name',
+            'userDetails_last_name',
+            'userDetails_title',
+            'userDetails_birth_date',
+            'userDetails_phone_number',
+            'userDetails_mobile_number',
+            'userDetails_city',
+            'userDetails_address',
+            'userDetails_zip_code',
+        ];
+    }
+
     public function findForPassport($email)
     {
         return self::where('email', $email)->first();

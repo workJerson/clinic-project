@@ -14,6 +14,15 @@ class HMO extends Model
         'status',
     ];
 
+    public function searchable()
+    {
+        return [
+            'name',
+            'discount',
+            'status',
+        ];
+    }
+
     public function patientHmo()
     {
         return $this->hasMany(PatientHmo::class, 'hmo_id');

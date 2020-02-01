@@ -22,6 +22,21 @@ class Personnel extends Model
         'image',
     ];
 
+    public function searchable()
+    {
+        return [
+            'first_name',
+            'middle_name',
+            'last_name',
+            'title',
+            'phone_number',
+            'mobile_number',
+            'city',
+            'address',
+            'zip_code',
+        ];
+    }
+
     public function patientServiceHistory()
     {
         return $this->hasMany(PatientServiceHistory::class);

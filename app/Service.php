@@ -15,6 +15,15 @@ class Service extends Model
         'service_type_id',
     ];
 
+    public function searchable()
+    {
+        return [
+            'name',
+            'status',
+            'serviceType_name',
+        ];
+    }
+
     public function serviceType()
     {
         return $this->belongsTo(ServiceType::class);

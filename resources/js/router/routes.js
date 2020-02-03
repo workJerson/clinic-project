@@ -19,6 +19,7 @@ import UserTableList from "../pages/UserTableList.vue";
 // hmo module
 import HMOTableList from "../pages/HMOTableList.vue";
 import CreateHMO from "../pages/CreateHMO.vue";
+import UpdateHMO from "../pages/UpdateHMO.vue";
 
 //services module
 import ServiceTableList from "../pages/ServiceTableList.vue";
@@ -85,9 +86,14 @@ const routes = [
                 component: HMOTableList
             },
             {
-                path: "create-hmo-list",
+                path: "hmo-table-list/create",
                 name: "Create New HMO",
                 component: CreateHMO
+            },
+            {
+                path: "hmo-table-list/update/:id",
+                name: "Update HMO",
+                component: UpdateHMO
             },
             {
                 path: "service-table-list",

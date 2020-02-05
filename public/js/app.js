@@ -3410,6 +3410,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3427,9 +3430,14 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchHMO(1, '', '', 1);
   },
   methods: {
+    updateHMO: function updateHMO(id) {
+      this.$router.push({
+        path: "hmo-table-list/update/".concat(id)
+      });
+    },
     createHMOPage: function createHMOPage() {
       this.$router.push({
-        path: 'create-hmo-list'
+        path: 'hmo-table-list/create'
       });
     },
     fetchHMO: function fetchHMO(page, dateFrom, dateTo, status) {
@@ -5723,6 +5731,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _pages_Notifications_NotificationTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/Notifications/NotificationTemplate */ "./resources/js/pages/Notifications/NotificationTemplate.vue");
+/* harmony import */ var _UserProfile_EditProfileForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserProfile/EditProfileForm.vue */ "./resources/js/pages/UserProfile/EditProfileForm.vue");
+/* harmony import */ var _UserProfile_UserCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProfile/UserCard.vue */ "./resources/js/pages/UserProfile/UserCard.vue");
+/* harmony import */ var _UserProfile_MembersCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserProfile/MembersCard.vue */ "./resources/js/pages/UserProfile/MembersCard.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    EditProfileForm: _UserProfile_EditProfileForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    UserCard: _UserProfile_UserCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    MembersCard: _UserProfile_MembersCard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NotificationTemplate: _pages_Notifications_NotificationTemplate__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      hmo: '',
+      discount: '',
+      about: ''
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$axios.get("api/hmos/".concat(this.$route.params.id)).then(function (response) {
+      _this.hmo = response.data.name;
+      _this.discount = response.data.discount;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  methods: {
+    updateHMO: function updateHMO() {
+      var _this2 = this;
+
+      this.$axios.patch("api/hmos/".concat(this.$route.params.id), {
+        name: this.hmo,
+        discount: this.discount
+      }).then(function (response) {
+        _this2.hmo = response.data.name;
+        _this2.discount = response.data.discount;
+
+        _this2.$notify({
+          message: 'HMO Successfully Updated',
+          component: _pages_Notifications_NotificationTemplate__WEBPACK_IMPORTED_MODULE_0__["default"],
+          icon: "ti-close",
+          horizontalAlign: 'right',
+          verticalAlign: 'top',
+          type: 'success'
+        });
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.$notify({
+          message: 'Something went wrong',
+          component: _pages_Notifications_NotificationTemplate__WEBPACK_IMPORTED_MODULE_0__["default"],
+          icon: "ti-close",
+          horizontalAlign: 'right',
+          verticalAlign: 'top',
+          type: 'danger'
+        });
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -15958,10 +16072,7 @@ var render = function() {
               staticClass: "btn btn-primary float-right",
               on: { click: _vm.createHMOPage }
             },
-            [
-              _c("i", { staticClass: "i-plus" }),
-              _vm._v("\n                    Create New HMO\n                ")
-            ]
+            [_vm._v("\n                  Create New HMO\n              ")]
           )
         ])
       ])
@@ -15990,9 +16101,9 @@ var render = function() {
                         _vm._l(_vm.tableColumns, function(column) {
                           return _c("th", { key: column }, [
                             _vm._v(
-                              "\n                    " +
+                              "\n                  " +
                                 _vm._s(column) +
-                                "\n                "
+                                "\n              "
                             )
                           ])
                         })
@@ -16050,7 +16161,24 @@ var render = function() {
                             domProps: { textContent: _vm._s(item.status) }
                           }),
                           _vm._v(" "),
-                          _c("td", [_vm._v("View")])
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateHMO(item.id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                      Edit\n                    "
+                                )
+                              ]
+                            )
+                          ])
                         ])
                       })
                     ],
@@ -20179,6 +20307,99 @@ var render = function() {
             ])
           ],
           2
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-md-12" },
+      [
+        _c("fg-input", {
+          attrs: {
+            type: "text",
+            label: "HMO Name",
+            placeholder: "Input the name of HMO"
+          },
+          model: {
+            value: _vm.hmo,
+            callback: function($$v) {
+              _vm.hmo = $$v
+            },
+            expression: "hmo"
+          }
+        }),
+        _vm._v(" "),
+        _c("fg-input", {
+          attrs: {
+            type: "text",
+            label: "Discount",
+            placeholder: "Input the Discount"
+          },
+          model: {
+            value: _vm.discount,
+            callback: function($$v) {
+              _vm.discount = $$v
+            },
+            expression: "discount"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("About HMO")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.about,
+                expression: "about"
+              }
+            ],
+            staticClass: "form-control border-input",
+            attrs: { rows: "5", placeholder: "HMO Description" },
+            domProps: { value: _vm.about },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.about = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", on: { click: _vm.updateHMO } },
+          [_vm._v("\n          Update\n        ")]
         )
       ],
       1
@@ -38790,6 +39011,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/UpdateHMO.vue":
+/*!******************************************!*\
+  !*** ./resources/js/pages/UpdateHMO.vue ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateHMO.vue?vue&type=template&id=d68f2270& */ "./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270&");
+/* harmony import */ var _UpdateHMO_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateHMO.vue?vue&type=script&lang=js& */ "./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UpdateHMO_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/UpdateHMO.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js&":
+/*!*******************************************************************!*\
+  !*** ./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateHMO_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateHMO.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/UpdateHMO.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateHMO_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270& ***!
+  \*************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateHMO.vue?vue&type=template&id=d68f2270& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/UpdateHMO.vue?vue&type=template&id=d68f2270&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateHMO_vue_vue_type_template_id_d68f2270___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/UserProfile.vue":
 /*!********************************************!*\
   !*** ./resources/js/pages/UserProfile.vue ***!
@@ -39314,8 +39604,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_UserTableList_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/UserTableList.vue */ "./resources/js/pages/UserTableList.vue");
 /* harmony import */ var _pages_HMOTableList_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/HMOTableList.vue */ "./resources/js/pages/HMOTableList.vue");
 /* harmony import */ var _pages_CreateHMO_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/CreateHMO.vue */ "./resources/js/pages/CreateHMO.vue");
-/* harmony import */ var _pages_ServiceTableList_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/ServiceTableList.vue */ "./resources/js/pages/ServiceTableList.vue");
-/* harmony import */ var _pages_CreateService_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/CreateService.vue */ "./resources/js/pages/CreateService.vue");
+/* harmony import */ var _pages_UpdateHMO_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/UpdateHMO.vue */ "./resources/js/pages/UpdateHMO.vue");
+/* harmony import */ var _pages_ServiceTableList_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/ServiceTableList.vue */ "./resources/js/pages/ServiceTableList.vue");
+/* harmony import */ var _pages_CreateService_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pages/CreateService.vue */ "./resources/js/pages/CreateService.vue");
 
 
  // GeneralViews
@@ -39331,6 +39622,7 @@ __webpack_require__.r(__webpack_exports__);
  // user module
 
  // hmo module
+
 
 
  //services module
@@ -39389,17 +39681,21 @@ var routes = [{
     name: "HMO Master List",
     component: _pages_HMOTableList_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
-    path: "create-hmo-list",
+    path: "hmo-table-list/create",
     name: "Create New HMO",
     component: _pages_CreateHMO_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   }, {
+    path: "hmo-table-list/update/:id",
+    name: "Update HMO",
+    component: _pages_UpdateHMO_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+  }, {
     path: "service-table-list",
     name: "Services Master List",
-    component: _pages_ServiceTableList_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _pages_ServiceTableList_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: "create-service-list",
     name: "Create New Service",
-    component: _pages_CreateService_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _pages_CreateService_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }]
 }, {
   path: "*",

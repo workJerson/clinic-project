@@ -2,6 +2,14 @@
 <div>
     <div class="row">
         <div class="col-12">
+            <div class="input-group col-4 float-left button-div">
+                <input class="form-control py-2" type="search" value="Search..." id="example-search-input">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="ti-search"></i>
+                    </button>
+                </span>
+            </div>
             <div class="col-4 float-right button-div">
                 <button class="btn btn-primary float-right" @click="createServicePage">
                     Create New Service
@@ -36,7 +44,14 @@
                   <td v-text="item.service"></td>
                   <td v-text="item.service_type"></td>
                   <td :class="(item.status === 'Active') ? 'text-success' : 'text-danger'" v-text="item.status"></td>
-                  <td>View</td>
+                  <td>
+                      <button class="btn btn-primary btn-sm" @click="updateHMO(item.id)">
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm" @click="updateHMO(item.id)">
+                        Remove
+                      </button>
+                </td>
                 </tr>
               </template>
             </tbody>

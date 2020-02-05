@@ -1,4 +1,14 @@
 <template>
+<div>
+    <div class="row">
+        <div class="col-12">
+            <div class="col-4 float-right button-div">
+                <button class="btn btn-primary float-right" @click="createServicePage">
+                    Create New Service
+                </button>
+            </div>
+        </div>
+    </div>
   <div class="row">
     <div class="col-12">
       <card :title="title">
@@ -48,7 +58,7 @@
                   <a
                     class="page-link"
                     v-bind:key="pageNumber"
-                    :class="{ 
+                    :class="{
                       last: (pageNumber === total && Math.abs(pageNumber - current_page) > 3),
                       first: (pageNumber === 1 && Math.abs(pageNumber - current_page) > 3)
                     }"
@@ -72,6 +82,7 @@
       </card>
     </div>
   </div>
+</div>
 </template>
 <script>
   export default {
@@ -91,6 +102,9 @@
       this.fetchServices(1, '', '', 1);
     },
     methods: {
+      createServicePage() {
+          this.$router.push({ path: 'create-service-list'});
+      },
       fetchServices(page, dateFrom, dateTo, status) {
         this.tableData = [];
         this.is_loading = true;
@@ -107,7 +121,7 @@
             return {
               id: item.id,
               service: item.name,
-              service_type: item.service_type.name,
+              service_type: item.service_type ? item.service_type.name : '--',
               status: (item.status === 1) ? 'Active' : 'Inactive',
             };
           });
@@ -135,5 +149,9 @@
 
   .color-text {
     color: #007bff !important;
+  }
+  .button-div {
+      padding: 0 !important;
+      margin-bottom: 1%;
   }
 </style>

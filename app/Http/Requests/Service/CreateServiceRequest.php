@@ -36,9 +36,10 @@ class CreateServiceRequest extends FormRequest
             ],
             'service_type_id' => [
                 'sometimes',
+                'nullable',
                 'integer',
-                'exists:service_types,id'
-            ]
+                'exists:service_types,id',
+            ],
         ];
     }
 }

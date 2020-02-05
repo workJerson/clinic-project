@@ -1,17 +1,15 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-primary" @click="createHMOPage">
-                    Create New HMO
-                </button>
+            <div class="col-12">
+                <div class="col-4 float-right button-div">
+                    <button class="btn btn-primary float-right" @click="createHMOPage">
+                        <i class='i-plus'></i>
+                        Create New HMO
+                    </button>
+                </div>
             </div>
         </div>
-        <br>
         <div class="row">
             <div class="col-12">
             <card :title="title">
@@ -152,5 +150,9 @@
 
   .color-text {
     color: #007bff !important;
+  }
+  .button-div {
+      padding: 0 !important;
+      margin-bottom: 1%;
   }
 </style>

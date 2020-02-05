@@ -22,7 +22,7 @@ import CreateHMO from "../pages/CreateHMO.vue";
 
 //services module
 import ServiceTableList from "../pages/ServiceTableList.vue";
-
+import CreateService from "../pages/CreateService.vue";
 const routes = [
     {
         path: '/auth',
@@ -93,6 +93,11 @@ const routes = [
                 path: "service-table-list",
                 name: "Services Master List",
                 component: ServiceTableList
+            },
+            {
+                path: "create-service-list",
+                name: "Create New Service",
+                component: CreateService
             },
         ]
     },

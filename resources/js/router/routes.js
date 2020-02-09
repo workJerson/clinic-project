@@ -24,6 +24,12 @@ import UpdateHMO from "../pages/UpdateHMO.vue";
 //services module
 import ServiceTableList from "../pages/ServiceTableList.vue";
 import CreateService from "../pages/CreateService.vue";
+
+//service rate module
+import ServiceRateTableList from "../pages/ServiceRateTableList.vue";
+import CreateServiceRate from "../pages/CreateServiceRate.vue";
+import UpdateServiceRate from "../pages/UpdateServiceRate.vue";
+
 const routes = [
     {
         path: '/auth',
@@ -104,6 +110,21 @@ const routes = [
                 path: "create-service-list",
                 name: "Create New Service",
                 component: CreateService
+            },
+            {
+                path: "service-rate-table-list",
+                name: "Service Rate Master List",
+                component: ServiceRateTableList
+            },
+            {
+                path: "service-rate-table-list/create",
+                name: "Create New Service Rate",
+                component: CreateServiceRate
+            },
+            {
+                path: "service-rate-table-list/update/:id",
+                name: "Update Service Rate",
+                component: UpdateServiceRate
             },
         ]
     },

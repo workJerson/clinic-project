@@ -31,6 +31,11 @@ import ServiceTypeTableList from "../pages/ServiceTypeTableList.vue";
 import CreateServiceType from "../pages/CreateServiceType.vue";
 import UpdateServiceType from "../pages/UpdateServiceType.vue";
 
+//service rate module
+import ServiceRateTableList from "../pages/ServiceRateTableList.vue";
+import CreateServiceRate from "../pages/CreateServiceRate.vue";
+import UpdateServiceRate from "../pages/UpdateServiceRate.vue";
+
 const routes = [
     {
         path: '/auth',
@@ -130,7 +135,22 @@ const routes = [
             {
                 path: "service-type-table-list/update/:id",
                 name: "Update Service Type",
-                component: UpdateServiceType
+                component: UpdateServiceType,
+            },
+            {
+                path: "service-rate-table-list",
+                name: "Service Rate Master List",
+                component: ServiceRateTableList
+            },
+            {
+                path: "service-rate-table-list/create",
+                name: "Create New Service Rate",
+                component: CreateServiceRate
+            },
+            {
+                path: "service-rate-table-list/update/:id",
+                name: "Update Service Rate",
+                component: UpdateServiceRate
             },
         ]
     },

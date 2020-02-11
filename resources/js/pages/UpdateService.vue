@@ -50,21 +50,32 @@ export default {
     };
   },
   mounted () {
-      this.fetchServiceTypes();
+    this.fetchService();
+    this.fetchServiceTypes();
   },
   methods: {
+    fetchService() {
+      this.$axios.get(`api/services/${this.$route.params.id}`)
+        .then((response) => {
+          this.serviceName = response.data.name;
+          this.serviceType = response.data.service_type_id;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     fetchServiceTypes() {
       this.$axios.get('/api/service-types', {
-          status: 1
+        status: 1
       }).then((response) => {
-          this.serviceTypesHolder = response.data;
+        this.serviceTypesHolder = response.data;
       }).catch((error) => {
-          console.log(error)
+        console.log(error)
       })
     },
     submitService() {
-      this.$axios.post(
-          'api/services',{
+      this.$axios.patch(
+          `api/services/${this.$route.params.id}`,{
             name: this.serviceName,
             service_type_id: this.serviceType
         }).then((response) => {

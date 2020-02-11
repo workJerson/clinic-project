@@ -24,6 +24,13 @@ import UpdateHMO from "../pages/UpdateHMO.vue";
 //services module
 import ServiceTableList from "../pages/ServiceTableList.vue";
 import CreateService from "../pages/CreateService.vue";
+import UpdateService from "../pages/UpdateService.vue";
+
+//service type module
+import ServiceTypeTableList from "../pages/ServiceTypeTableList.vue";
+import CreateServiceType from "../pages/CreateServiceType.vue";
+import UpdateServiceType from "../pages/UpdateServiceType.vue";
+
 const routes = [
     {
         path: '/auth',
@@ -101,9 +108,29 @@ const routes = [
                 component: ServiceTableList
             },
             {
-                path: "create-service-list",
+                path: "service-table-list/create",
                 name: "Create New Service",
                 component: CreateService
+            },
+            {
+                path: "service-table-list/update/:id",
+                name: "Update Service",
+                component: UpdateService
+            },
+            {
+                path: "service-type-table-list",
+                name: "Service Type Master List",
+                component: ServiceTypeTableList
+            },
+            {
+                path: "service-type-table-list/create",
+                name: "Create New Service Type",
+                component: CreateServiceType
+            },
+            {
+                path: "service-type-table-list/update/:id",
+                name: "Update Service Type",
+                component: UpdateServiceType
             },
         ]
     },

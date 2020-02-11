@@ -7,6 +7,7 @@
         <sidebar-link to="/user-table-list" name="User Management" icon="ti-user" />
         <sidebar-link to="/hmo-table-list" name="HMO Management" icon="ti-layout-cta-right" />
         <sidebar-link to="/service-table-list" name="Services Management" icon="ti-hand-open" />
+        <sidebar-link to="/service-type-table-list" name="Service Type Management" icon="ti-hand-open" />
         <sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt" />
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />

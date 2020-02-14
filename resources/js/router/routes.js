@@ -15,6 +15,7 @@ import TableList from "../pages/TableList.vue";
 
 // user module
 import UserTableList from "../pages/UserTableList.vue";
+import CreateUser from "../pages/CreateUser.vue";
 
 // hmo module
 import HMOTableList from "../pages/HMOTableList.vue";
@@ -91,6 +92,11 @@ const routes = [
                 path: "user-table-list",
                 name: "User Master List",
                 component: UserTableList
+            },
+            {
+                path: "user-table-list/create",
+                name: "Create New User",
+                component: CreateUser
             },
             {
                 path: "hmo-table-list",
